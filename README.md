@@ -28,6 +28,32 @@ docker ps
 docker stop [CONTAINER ID or NAMES]
 ```
 
+### Django関連のコマンド
+- Djangoのプロジェクトを作成(初回のみ)
+```
+docker-compose run api django-admin.py startproject config .
+```
+
+- makemigrations
+```
+docker-compose run api python3 ./manage.py makemigrations api
+```
+
+- migrate
+```
+docker-compose run api python3 ./manage.py migrate api
+```
+
+- createsuperuser (Password is password)(初回のみ)
+```
+docker-compose run api python3 ./manage.py createsuperuser --username admin --email admin@example.com
+```
+
+- startapp(初回のみ)
+```
+docker-compose run api python3 ./manage.py startapp api
+```
+
 ### 手順(通常時)
 - docker-composeでコンテナを起動
 ```
@@ -71,11 +97,6 @@ docker ps
 - ログの確認
 ```
 docker logs -f [CONTAINER ID or NANES]
-```
-
-### Flask関連のコマンド
-```zsh
-# 追記予定
 ```
 
 ### mysqlコマンド一覧

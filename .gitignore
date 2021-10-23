@@ -3,12 +3,9 @@
 
 # Env
 .env
+.env.*
 
-### Flask ###
-instance/*
-!instance/.gitignore
-.webassets-cache
-
+### Django ###
 *.log
 *.pot
 *.pyc
@@ -18,6 +15,7 @@ db.sqlite3
 db.sqlite3-journal
 
 # media
+media/
 
 # deploy
 *.pem

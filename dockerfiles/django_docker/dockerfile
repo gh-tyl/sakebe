@@ -22,6 +22,9 @@ RUN apt-get update && \
     sudo bin/install-mecab-ipadic-neologd -n -y && \
     echo "dicdir=/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd">/etc/mecabrc && \
     cp /etc/mecabrc /usr/local/etc/
+RUN apt-get update && \
+    apt-get install -y \
+    portaudio19-dev
 RUN pip3 install --upgrade pip && \
     pip3 install -r requirements.txt
 COPY . /code/

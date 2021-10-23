@@ -1,0 +1,17 @@
+Django
+djangorestframework
+djangorestframework-jwt
+django-environ
+django-storages
+django-cors-headers
+django-import-export
+django-webpack-loader
+psycopg2-binary
+gunicorn
+requests
+gensim
+mecab-python3
+pyaudio
+SpeechRecognition
+cognitive_face
+opencv-python-headless
