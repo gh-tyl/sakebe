@@ -10,3 +10,7 @@ marshmallow-sqlalchemy
 gunicorn
 requests
 mecab-python3
+pyaudio
+SpeechRecognition
+gensim
+janome
