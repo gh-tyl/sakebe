@@ -10,17 +10,18 @@
 </template>
 
 <script>
-import VueTagCloud from 'vue-tag-cloud'
+// import Vue from 'vue'
+// import VueTagCloud from 'vue-tag-cloud'
 
-new Vue({
-  el: '#app',
-  components: {
-    VueTagCloud
-  }
-})
+// Vue({
+//   el: '#app',
+//   components: {
+//     VueTagCloud
+//   }
+// })
 
 export default {
-  async asyncData({ $axios }) {
+  async asyncData ({ $axios }) {
     // 取得先のURL
     const url = 'https://qiita.com/api/v2/items'
     // リクエスト（Get）
