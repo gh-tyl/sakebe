@@ -10,3 +10,4 @@ marshmallow-sqlalchemy
 gunicorn
 requests
 mecab-python3
+sklearn

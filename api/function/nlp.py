@@ -1,10 +1,8 @@
 import os
 import re
-import nltk
+# import nltk
 import MeCab
-import pandas as pd
 from sklearn.feature_extraction import text
-from DictionaryServices import DCSGetTermRangeInString, DCSCopyTextDefinition
 
 class Cleasing:
     def __init__(self):
@@ -12,10 +10,10 @@ class Cleasing:
         self.stop_words_en = text.ENGLISH_STOP_WORDS
         self.stop_words_EN = [word.upper() for word in self.stop_words_en]
         self.stop_words_EN_Cap = [word.capitalize() for word in self.stop_words_en]
-        self.stop_words_en_nltk = nltk.corpus.stopwords.words('english')
-        self.stop_words_EN_nltk = [word.upper() for word in self.stop_words_en_nltk]
-        self.stop_words_EN_Cap_nltk = [word.capitalize() for word in self.stop_words_en_nltk]
-        addstopwords = ["BA", "English", "Hibernate", "STAY", "SURU"]
+        # self.stop_words_en_nltk = nltk.corpus.stopwords.words('english')
+        # self.stop_words_EN_nltk = [word.upper() for word in self.stop_words_en_nltk]
+        # self.stop_words_EN_Cap_nltk = [word.capitalize() for word in self.stop_words_en_nltk]
+        addstopwords = ["SURU"]
         self.stopwords = self.stopwordslist_creation(addstopwords)
         self.elim = ['数', '接尾', '非自立']
         self.part = ['名詞', '動詞', '形容詞']
@@ -54,9 +52,9 @@ class Cleasing:
         stopwords.extend(self.stop_words_en)
         stopwords.extend(self.stop_words_EN)
         stopwords.extend(self.stop_words_EN_Cap)
-        stopwords.extend(self.stop_words_en_nltk)
-        stopwords.extend(self.stop_words_EN_nltk)
-        stopwords.extend(self.stop_words_EN_Cap_nltk)        
+        # stopwords.extend(self.stop_words_en_nltk)
+        # stopwords.extend(self.stop_words_EN_nltk)
+        # stopwords.extend(self.stop_words_EN_Cap_nltk)        
         return stopwords
 
     def delete_brackets(self, s):
