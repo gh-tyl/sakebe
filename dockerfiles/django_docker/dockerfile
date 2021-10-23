@@ -1,7 +1,4 @@
 FROM ubuntu:18.04
-RUN mkdir /code
-COPY requirements.txt /code/
-WORKDIR /code
 RUN apt-get update && \
     apt-get install -y \
     vim \
@@ -13,6 +10,7 @@ RUN apt-get update && \
     python3.8 \
     python3-pip \
     libgl1-mesa-dev \
+    portaudio19-dev \
     mecab \
     libmecab-dev \
     mecab-ipadic-utf8 && \
@@ -22,9 +20,9 @@ RUN apt-get update && \
     sudo bin/install-mecab-ipadic-neologd -n -y && \
     echo "dicdir=/usr/lib/x86_64-linux-gnu/mecab/dic/mecab-ipadic-neologd">/etc/mecabrc && \
     cp /etc/mecabrc /usr/local/etc/
-RUN apt-get update && \
-    apt-get install -y \
-    portaudio19-dev
+RUN mkdir /code
+COPY requirements.txt /code/
+WORKDIR /code
 RUN pip3 install --upgrade pip && \
     pip3 install -r requirements.txt
 COPY . /code/
