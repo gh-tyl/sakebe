@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  api:
+    container_name: flask-mitsui
+    build: ./dockerfiles/flask_docker
+    command:
+      # python3 app.py
+      python3 app.py -m flask run --host=0.0.0.0
+    volumes:
+      - ./api:/code
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./.env
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DEBUG: ${DEBUG}
+      LANG: ${LANG}
+      PYTHONUNBUFFERED: ${PYTHONUNBUFFERED}
+      PYTHONIOENCODING: ${PYTHONIOENCODING}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  client:
+    container_name: nuxt-mitsui
+    build: ./dockerfiles/nuxt_docker
+    tty: true
+    volumes:
+      - ./client:/code
+    ports:
+      - "3000:3000"

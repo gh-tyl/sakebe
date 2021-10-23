@@ -4,7 +4,11 @@
 # Env
 .env
 
-### Django ###
+### Flask ###
+instance/*
+!instance/.gitignore
+.webassets-cache
+
 *.log
 *.pot
 *.pyc
@@ -17,3 +21,19 @@ db.sqlite3-journal
 
 # deploy
 *.pem
+
+### Nuxtjs ###
+# dependencies
+node_modules
+# Nuxt build
+.nuxt
+# Nuxt generate
+dist
+
+### VisualStudioCode ###
+.vscode/
+
+# Environments
+.env
+
+# binary
