@@ -13,6 +13,13 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ['url', 'name']
 
+# class RawScreamSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Scream
+#         fields = ['content', 'color', 'expression_points', 'decibel', 'created_at']
+#     def create(self, validated_data):
+#         return Scream.objects.create(**validated_data)
+
 class ScreamSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scream
