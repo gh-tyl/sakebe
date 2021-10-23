@@ -9,5 +9,7 @@ sqlalchemy_utils
 marshmallow-sqlalchemy
 gunicorn
 requests
+gensim
 mecab-python3
-sklearn
+pyaudio
+SpeechRecognition
