@@ -4,5 +4,6 @@ from rest_framework import routers
 from .views import *
 
 urlpatterns = [
-    url(r'^stream_view/$', ScreamView.as_view())
+    url(r'^stream_list/$', ScreamListView.as_view()),
+    url(r'^stream_register/$', ScreamRegisterView.as_view())
 ]

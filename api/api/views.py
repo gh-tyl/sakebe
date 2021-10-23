@@ -1,7 +1,8 @@
+from datetime import datetime
 from django.contrib.auth.models import User, Group
 from rest_framework import generics, permissions, status, viewsets
 from rest_framework.response import Response
-from django.db import transaction
+from django.db import connection, transaction
 
 from .models import *
 from .serializers import *
@@ -22,20 +23,33 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-# # ユーザ情報取得のView(GET)
-# class ScreamListView(generics.RetrieveAPIView):
-#     permission_classes = (permissions.IsAuthenticated,)
-#     queryset = MyUser.objects.all()
-#     serializer_class = UserSerializer
+# Scream情報取得のView(GET)
+class ScreamListView(generics.ListAPIView):
+    # queryset = Scream.objects.all()
+    serializer_class = ScreamListSerializer
+    def get_queryset(self):
+        def dictfetchall(cursor):
+            "Return all rows from a cursor as a dict"
+            columns = [col[0] for col in cursor.description]
+            return [
+                dict(zip(columns, row))
+                for row in cursor.fetchall()
+            ]
+        current_date = datetime.today().date()
+        with connection.cursor() as cursor:
+            cursor.execute(
+                f'''
+                SELECT *
+                FROM scream 
+                WHERE scream.created_at >= '{current_date}' 
+                ORDER BY scream.created_at
+                '''
+            )
+            data = dictfetchall(cursor)
+        # return data['results']
+        return data
 
-#     def get(self, request, format=None):
-#         return Response(data={
-#             'username': request.user.username,
-#             'email': request.user.email,
-#             },
-#             status=status.HTTP_200_OK)
-
-class ScreamView(generics.CreateAPIView):
+class ScreamRegisterView(generics.CreateAPIView):
     queryset = Scream.objects.all()
     serializer_class = ScreamSerializer
     # @transaction.atomic

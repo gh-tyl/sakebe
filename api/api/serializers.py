@@ -18,4 +18,9 @@ class ScreamSerializer(serializers.ModelSerializer):
         model = Scream
         fields = ['content', 'color', 'expression_points', 'decibel', 'created_at']
     def create(self, validated_data):
-        return Scream.objects.update_or_create(**validated_data)
+        return Scream.objects.create(**validated_data)
+
+class ScreamListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Scream
+        fields = ['content', 'color', 'expression_points', 'decibel', 'created_at']
