@@ -68,7 +68,8 @@ docker logs -f [CONTAINER ID or NANES]
 ### 3-1. ブランチのルール
 - 本番環境: main
 - 開発環境: develop
-- 新機能開発: feature
+- 新機能開発(フロントエンド): frontend
+- 新機能開発(バックエンド): backend
 
 ### Curlコマンド
 API
