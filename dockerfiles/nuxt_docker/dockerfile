@@ -8,6 +8,7 @@ RUN apt-get update && \
     nodejs \
     npm && \
     npm install n create-nuxt-app -g && \
+    npm install vue-tag-cloud --save && \
     n stable && \
     apt purge -y nodejs npm
 RUN mkdir /code

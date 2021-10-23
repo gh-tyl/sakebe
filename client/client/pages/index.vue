@@ -1,9 +1,9 @@
 <template>
   <div>
     <ul>
-       <li v-for="(post, index) in posts" :key="index">
-         <a :href="'post.url'" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
-         <VueTagCloud v-bind:data="tagData"></VueTagCloud>
+      <li v-for="(post, index) in posts" :key="index">
+        <a :href="'post.url'" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
+        <!-- <VueTagCloud v-bind:data="tagData"></VueTagCloud> -->
       </li>
     </ul>
   </div>
