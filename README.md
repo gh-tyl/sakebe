@@ -35,6 +35,26 @@ docker stop [CONTAINER ID or NAMES]
 ```
 docker-compose up -d
 ```
+
+### 手順(フロントエンド)
+```
+docker exec -it nuxt /bin/bash
+```
+
+```
+cd client
+npm install
+```
+
+```
+npm run dev
+```
+
+- frontend
+    - http://localhost:3000
+- backend
+    - http://localhost:5000
+
 ### 手順(Case by case)
 - db更新時
 ```
