@@ -2,15 +2,14 @@ version: '3'
 
 services:
   api:
-    container_name: flask-mitsui
-    build: ./dockerfiles/flask_docker
+    container_name: django-mitsui
+    build: ./dockerfiles/django_docker
     command:
-      # python3 app.py
-      python3 app.py -m flask run --host=0.0.0.0
+      python3 manage.py runserver 0.0.0.0:8000
     volumes:
       - ./api:/code
     ports:
-      - "5000:5000"
+      - "8000:8000"
     env_file:
       - ./.env
     environment:

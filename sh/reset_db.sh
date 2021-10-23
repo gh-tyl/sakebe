@@ -1,5 +1,5 @@
 #!/bin/sh
-source ./.env
+source ./.env.db
 echo "Start dropdb. Type password."
 dropdb --if-exists $DB_NAME --host=$DB_HOST_LOCAL --port=$DB_PORT --username=$DB_USER --password
 echo "Start dropuser. Type password."
