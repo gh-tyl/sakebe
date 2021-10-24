@@ -13,9 +13,22 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         model = Group
         fields = ['url', 'name']
 
-class ScreamSerializer(serializers.ModelSerializer):
+class ScreamUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Scream
+        fields = ['audio_path', 'created_at']
+        # fields = ['audio_path', 'video_path', 'created_at']
+    def create(self, validated_data):
+        return Scream.objects.create(**validated_data)
+
+class ScreamRegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Scream
         fields = ['content', 'color', 'expression_points', 'decibel', 'created_at']
     def create(self, validated_data):
-        return Scream.objects.update_or_create(**validated_data)
+        return Scream.objects.create(**validated_data)
+
+class ScreamListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Scream
+        fields = ['content', 'color', 'expression_points', 'decibel', 'created_at']

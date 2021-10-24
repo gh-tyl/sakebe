@@ -4,7 +4,7 @@ import re
 import MeCab
 from sklearn.feature_extraction import text
 
-class Cleasing:
+class NLP:
     def __init__(self):
         # stopwords english ver.
         self.stop_words_en = text.ENGLISH_STOP_WORDS
@@ -42,12 +42,12 @@ class Cleasing:
     #ストップワードの作成
     def stopwordslist_creation(self, stopwordlist):
         stopwords=[]
-        with open('./stopwords/stopwords.txt', 'r') as f:
-            words = f.readlines()
-            for line in words:
-                line = line.replace('\n', '')
-                if not line==u'':
-                    stopwords.append(line)
+        # with open('./stopwords/stopwords.txt', 'r') as f:
+        #     words = f.readlines()
+        #     for line in words:
+        #         line = line.replace('\n', '')
+        #         if not line==u'':
+        #             stopwords.append(line)
         stopwords.extend(stopwordlist)
         stopwords.extend(self.stop_words_en)
         stopwords.extend(self.stop_words_EN)

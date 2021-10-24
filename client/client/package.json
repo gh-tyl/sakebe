@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "webpack --mode development",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -22,11 +22,9 @@
     "@nuxtjs/eslint-config": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/vuetify": "^1.12.1",
-    "@types/jquery": "^3.5.8",
-    "eslint": "^7.29.0",
     "eslint-plugin-nuxt": "^2.0.0",
     "eslint-plugin-vue": "^7.12.1",
-    "jquery": "^3.6.0"
+    "webpack-cli": "^4.9.1"
   },
   "config": {
     "nuxt": {
