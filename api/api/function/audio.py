@@ -1,3 +1,4 @@
+import os
 from os import path
 import wave
 import numpy as np
@@ -5,7 +6,10 @@ import subprocess
 import speech_recognition as sr
 
 def convert_webm_to_wav(file):
-    file_name = 'sample.wav'
+    if not os.path.isfile('sample.wav'):
+        f = open('./sample.wav', 'w')
+        f.close()
+    file_name='sample.wav'
     command = ['ffmpeg', '-i', file, '-acodec', 'pcm_s16le', '-ac', '1', '-ar', '16000', file_name, '-y']
     subprocess.run(command,stdout=subprocess.PIPE,stdin=subprocess.PIPE)
     return file_name

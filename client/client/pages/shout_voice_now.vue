@@ -72,6 +72,19 @@ export default Vue.extend({
         a.download = Math.floor(Date.now() / 1000) + this.audioExtension;
         document.body.appendChild(a);
         a.click();
+        const api_url = "/api/scream_upload/";
+        console.log("api_url")
+        console.log(api_url)
+        console.log("a")
+        console.log(a)
+        console.log(a.href)
+        // const file = new File([a], a.download, {type: "application/octet-stream"});
+        // const response = this.$axios.post(api_url, {"audio_path":file});
+        const response = this.$axios.post(api_url, {"audio_path":a});
+        // const response = this.$axios.post(api_url, {"audio_path":a});
+        // const response = this.$axios.post(api_url, {"audio_path":a.href});
+        // const response = this.$axios.post(api_url, {"audio_path":a.download});
+        console.log(response.data);
       });
       this.status = "ready";
     });

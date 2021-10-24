@@ -15,8 +15,8 @@ export default {
     };
   },
   async mounted() {
-    const url = "/api/scream_list/";
-    const response = await this.$axios.get(url);
+    const url = "/api/scream_upload/";
+    const response = await this.$axios.post(url);
     this.dat = response.data;
     console.log(this.dat);
   }

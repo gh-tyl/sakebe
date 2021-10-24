@@ -52,27 +52,37 @@ class ScreamListView(generics.ListAPIView):
         # return data['results']
         return data
 
-class ScreamUploadView(generics.CreateAPIView):
+class ScreamUploadView(generics.CreateAPIView):    
     queryset = Scream.objects.all()
     serializer_class = ScreamUploadSerializer
     # @transaction.atomic
     def post(self, request, format=None):
-        bucket = s3.Bucket("/media/audio/sample.wav")
-        print(bucket)
+        print(request.data)
+        print(len(request.data["audio_path"]))
+        print(type(request.data["audio_path"]))
+        # bucket = s3.Bucket("/media/audio/sample.wav")
+        print("----")
+        print(request.data["audio_path"])
+        print("----")
+        file_path = audio.convert_webm_to_wav(request.data["audio_path"]+'.webm')
+        volume = audio.get_voice_volumn(file_path)
+        print(volume)
+        text = audio.wav_to_letter(file_path)
+        print(text)
+        text_label = letter_classification(text)
+        print(text_label)
+        # audio.wav_to_letter(data['audio_path'])
+        # audio.wav_to_letter("s3://media/audio/sample.wav")
         data = {
+            "content": text,
+            "color": text_label,
+            # "expression_points": ,
+            "decibel": volume,
             # "audio_path": request.data["audio_path"],
-            "audio_path": bucket,
+            # "audio_path": bucket,
             # "audio_path": "https://mf-app-s3.s3.ap-northeast-1.amazonaws.com/media/audio/sample.wav",
             # "image_path": request.data["image_path"],
         }
-        print(data['audio_path'])
-        file_path = audio.convert_webm_to_wav(data["audio_path"])
-        audio.get_voice_volumn(file_path)
-        audio.wav_to_letter(file_path)
-        # audio.wav_to_letter(data['audio_path'])
-        # audio.wav_to_letter("s3://media/audio/sample.wav")
-        print('----')
-        
         serializer = ScreamUploadSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
