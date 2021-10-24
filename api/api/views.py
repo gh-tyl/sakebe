@@ -10,7 +10,6 @@ from .function import audio, letter_classification
 import boto3
 s3 = boto3.resource('s3', verify=False)
 
-
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -66,12 +65,11 @@ class ScreamUploadView(generics.CreateAPIView):
             # "audio_path": "https://mf-app-s3.s3.ap-northeast-1.amazonaws.com/media/audio/sample.wav",
             # "image_path": request.data["image_path"],
         }
-        serializer = ScreamUploadSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-        print('----')
         print(data['audio_path'])
-        audio.wav_to_letter(data['audio_path'])
+        file_path = audio.convert_webm_to_wav(data["audio_path"])
+        audio.get_voice_volumn(file_path)
+        audio.wav_to_letter(file_path)
+        # audio.wav_to_letter(data['audio_path'])
         # audio.wav_to_letter("s3://media/audio/sample.wav")
         print('----')
         
