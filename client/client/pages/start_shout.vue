@@ -1,5 +1,5 @@
 <template>
-  <div class="hero overlay">
+  <div class="hero_1 overlay">
     <div class="text-box">
       <h1 class="title">SAKEBE</h1>
       <p class="description_1">
@@ -27,7 +27,7 @@ body {
 
 /* 全画面表示CSS */
 
-.hero {
+.hero_1 {
   height: 100vh; /* 全画面表示 */
   background-repeat: no-repeat;
   background-size: cover;
