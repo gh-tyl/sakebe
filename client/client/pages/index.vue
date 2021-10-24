@@ -2,7 +2,7 @@
   <div>
     <ul>
       <li v-for="(post, index) in posts" :key="index">
-        <span id="content" :style="{top: Math.floor(Math.random() * 500) + 'px', left: Math.floor(Math.random() * 500) + 'px', color: fontColorSelector(post.likes_count)}">
+        <span id="content" :style="{top: Math.floor(Math.random() * 500) + 'px', left: Math.floor(Math.random() * 500) + 'px', color: fontColorSelector(post.likes_count), 'font-size': fontSizeSelector(post.items_count) + 'px'}">
           <client-only>
             <div id="textcontent">
               {{ post.title }} <!-- contentにする -->
@@ -45,6 +45,12 @@ export default {
         return "#8BAAD3"
       }
       return "#AFA0CD"
+    },
+    fontSizeSelector: function (items_count) {
+      if (items_count > 0 && items_count < 100 ){
+        return "30"
+      }
+      return "50"
     }
   }
   // data: {
