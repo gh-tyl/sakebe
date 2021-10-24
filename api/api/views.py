@@ -6,6 +6,10 @@ from django.db import connection, transaction
 
 from .models import *
 from .serializers import *
+from .function import audio, letter_classification
+import boto3
+s3 = boto3.resource('s3', verify=False)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -54,15 +58,43 @@ class ScreamUploadView(generics.CreateAPIView):
     serializer_class = ScreamUploadSerializer
     # @transaction.atomic
     def post(self, request, format=None):
+        bucket = s3.Bucket("/media/audio/sample.wav")
+        print(bucket)
         data = {
-            "audio_path": request.data["audio_path"],
+            # "audio_path": request.data["audio_path"],
+            "audio_path": bucket,
+            # "audio_path": "https://mf-app-s3.s3.ap-northeast-1.amazonaws.com/media/audio/sample.wav",
             # "image_path": request.data["image_path"],
         }
         serializer = ScreamUploadSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
+        print('----')
+        print(data['audio_path'])
+        audio.wav_to_letter(data['audio_path'])
+        # audio.wav_to_letter("s3://media/audio/sample.wav")
+        print('----')
+        
+        serializer = ScreamUploadSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
             return Response(request.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# class ScreamUploadView(generics.CreateAPIView):
+#     queryset = Scream.objects.all()
+#     serializer_class = ScreamUploadSerializer
+#     # @transaction.atomic
+#     def post(self, request, format=None):
+#         data = {
+#             "audio_path": request.data["audio_path"],
+#             # "image_path": request.data["image_path"],
+#         }
+#         serializer = ScreamUploadSerializer(data=data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(request.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ScreamRegisterView(generics.CreateAPIView):
     queryset = Scream.objects.all()
