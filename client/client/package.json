@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "webpack --mode development",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -23,7 +23,8 @@
     "@nuxtjs/eslint-module": "^3.0.2",
     "@nuxtjs/vuetify": "^1.12.1",
     "eslint-plugin-nuxt": "^2.0.0",
-    "eslint-plugin-vue": "^7.12.1"
+    "eslint-plugin-vue": "^7.12.1",
+    "webpack-cli": "^4.9.1"
   },
   "config": {
     "nuxt": {
