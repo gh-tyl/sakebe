@@ -5,7 +5,7 @@
         <span id="content" :style="{top: Math.floor(Math.random() * 500) + 'px', left: Math.floor(Math.random() * 500) + 'px', color: fontColorSelector(post.likes_count)}">
           <client-only>
             <div id="textcontent">
-              {{ post.title }} <!-- contentにする -->
+              {{ post.content }} <!-- contentにする -->
             </div>
           </client-only>
         </span>
@@ -16,19 +16,31 @@
 
 <script>
 export default {
-  async asyncData ({ $axios }) {
-    // 取得先のURL
-    const url = 'https://qiita.com/api/v2/items'
-    // リクエスト（Get）
-    const response = await $axios.$get(url);
-    // 配列で返ってくるのでJSONにして返却
+  // async asyncData ({ $axios }) {
+  //   // 取得先のURL
+  //   // const url = 'https://qiita.com/api/v2/items'
+  //   const url = '/api/scream_upload/'
+  //   // リクエスト（Get）
+  //   const response = await $axios.$get(url);
+  //   // 配列で返ってくるのでJSONにして返却
+  //   return {
+  //     posts: response
+  //   };
+  // },
+
+  data() {
     return {
-      posts: response
-    };
+      color: [],
+      posts: []
+    }
   },
-   data: {
-    color: []
-  },
+  async mounted() {
+    const url = "/api/scream_list/";
+    const response = await this.$axios.get(url);
+    this.dat = response.data;
+    console.log(this.dat['results'])
+    this.posts = this.dat['results']
+  },  
   // computed: {
   //   // a computed getter
   //   fontColor: function () {
