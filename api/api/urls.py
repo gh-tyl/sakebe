@@ -5,5 +5,6 @@ from .views import *
 
 urlpatterns = [
     url(r'^scream_list/$', ScreamListView.as_view()),
-    url(r'^scream_register/$', ScreamRegisterView.as_view())
+    url(r'^scream_register/$', ScreamRegisterView.as_view()),
+    url(r'^scream_upload/$', ScreamUploadView.as_view()),
 ]

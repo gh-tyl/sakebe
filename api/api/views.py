@@ -49,9 +49,24 @@ class ScreamListView(generics.ListAPIView):
         # return data['results']
         return data
 
+class ScreamUploadView(generics.CreateAPIView):
+    queryset = Scream.objects.all()
+    serializer_class = ScreamUploadSerializer
+    # @transaction.atomic
+    def post(self, request, format=None):
+        data = {
+            "audio_path": request.data["audio_path"],
+            # "image_path": request.data["image_path"],
+        }
+        serializer = ScreamUploadSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(request.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 class ScreamRegisterView(generics.CreateAPIView):
     queryset = Scream.objects.all()
-    serializer_class = ScreamSerializer
+    serializer_class = ScreamRegisterSerializer
     # @transaction.atomic
     def post(self, request, format=None):
         data = {
@@ -60,7 +75,7 @@ class ScreamRegisterView(generics.CreateAPIView):
             "expression_points": request.data["expression_points"],
             "decibel": request.data["decibel"],
         }
-        serializer = ScreamSerializer(data=data)
+        serializer = ScreamRegisterSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(request.data, status=status.HTTP_201_CREATED)

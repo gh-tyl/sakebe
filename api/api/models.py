@@ -6,6 +6,8 @@ class Scream(models.Model):
     color = models.IntegerField(null=True)
     expression_points = models.FloatField(null=True)
     decibel = models.FloatField(null=True)
+    audio_path = models.FileField(upload_to='media/audio', null=True)
+    video_path = models.FileField(upload_to='media/images', null=True)
     created_at = models.DateTimeField(auto_now=True)
     class Meta:
         db_table = 'scream'
