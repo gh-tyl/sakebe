@@ -10,6 +10,7 @@ boto3
 psycopg2-binary
 gunicorn
 requests
+sklearn
 gensim
 mecab-python3
 pyaudio
