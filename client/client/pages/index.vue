@@ -1,25 +1,20 @@
 <template>
   <div>
     <ul>
-       <li v-for="(post, index) in posts" :key="index">
-         <a :href="'post.url'" target="_blank" rel="noopener noreferrer">{{ post.title }}</a>
-         <VueTagCloud v-bind:data="tagData"></VueTagCloud>
+      <li v-for="(post, index) in posts" :key="index">
+        <span id="content" :style="{top: Math.floor(Math.random() * 500) + 'px', left: Math.floor(Math.random() * 500) + 'px'}">
+          <client-only>
+            <div id="textcontent">
+              {{ post.title }}
+            </div>
+          </client-only>
+        </span>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-// import Vue from 'vue'
-// import VueTagCloud from 'vue-tag-cloud'
-
-// Vue({
-//   el: '#app',
-//   components: {
-//     VueTagCloud
-//   }
-// })
-
 export default {
   async asyncData ({ $axios }) {
     // 取得先のURL
@@ -37,5 +32,23 @@ export default {
 <style>
 * {
   background-color: #EDEAE2;
+}
+
+#content {
+  position: relative;
+  width: 100%;
+  /* height: 400px; */
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+span {
+  min-height: 200px;
+  background-color: transparent;
+}
+
+#textcontent {
+  min-height: 70px;
+  background-color: transparent;
 }
 </style>
