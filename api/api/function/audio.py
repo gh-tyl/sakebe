@@ -1,7 +1,14 @@
+from os import path
 import wave
 import numpy as np
+import subprocess
 import speech_recognition as sr
 
+def convert_webm_to_wav(file):
+    file_name = 'sample.wav'
+    command = ['ffmpeg', '-i', file, '-acodec', 'pcm_s16le', '-ac', '1', '-ar', '16000', file_name, '-y']
+    subprocess.run(command,stdout=subprocess.PIPE,stdin=subprocess.PIPE)
+    return file_name
 
 def wav_to_letter(path):
     r = sr.Recognizer()
@@ -11,8 +18,8 @@ def wav_to_letter(path):
         text = r.recognize_google(audio, language='ja-JP')
     except:
         text = "読み込みに失敗しました。"
+    print(text)
     return text
-
 
 '''
 参考サイト
@@ -39,8 +46,7 @@ def smoothing(input, window):
     return np.array(output)
 
 
-def get_voice_volumn(path):
-
+def get_voice_volumn(path):    
     wave_file = wave.open(path, "rb")  # Open
     x = wave_file.readframes(wave_file.getnframes())  # frameの読み込み
     x = np.frombuffer(x, dtype="int16")  # numpy.arrayに変換
@@ -56,5 +62,11 @@ def get_voice_volumn(path):
 
     # 音量がマイナスに到達しているものは、採点の対象外とする
     db_score = smoothed_db[smoothed_db > 0]
-
+    print(np.average(db_score))
     return np.average(db_score)
+
+if __name__=='__main__':
+    path = convert_webm_to_wav('1635043599.webm')
+    get_voice_volumn(path)
+    print('----')
+    wav_to_letter(path)
