@@ -43,10 +43,14 @@ class ScreamListView(generics.ListAPIView):
             cursor.execute(
                 f'''
                 SELECT *
-                FROM scream 
-                WHERE scream.created_at >= '{current_date}' 
-                ORDER BY scream.created_at
+                FROM scream
                 '''
+                # f'''
+                # SELECT *
+                # FROM scream 
+                # WHERE scream.created_at >= '{current_date}' 
+                # ORDER BY scream.created_at
+                # '''
             )
             data = dictfetchall(cursor)
         # return data['results']

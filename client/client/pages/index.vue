@@ -2,7 +2,8 @@
   <div>
     <ul>
       <li v-for="(post, index) in posts" :key="index">
-        <span id="content" :style="{top: Math.floor(Math.random() * 500) + 'px', left: Math.floor(Math.random() * 500) + 'px', color: fontColorSelector(post.likes_count), 'font-size': fontSizeSelector(post.items_count) + 'px'}">
+        <!-- <span id="content" :style="{top: Math.floor(Math.random() * 500) + 'px', left: Math.floor(Math.random() * 500) + 'px', color: fontColorSelector(post.color), 'font-size': fontSizeSelector(post.decibel) + 'px'}"> -->
+        <span id="content" :style="{top: Math.floor(Math.random() * 500) + 'px', left: Math.floor(Math.random() * 500) + 'px', color: fontColorSelector(post.color), 'font-size': post.decibel*3 + 'px'}">
           <client-only>
             <div id="textcontent">
               {{ post.content }} <!-- contentにする -->
@@ -58,8 +59,8 @@ export default {
       }
       return "#AFA0CD"
     },
-    fontSizeSelector: function (items_count) {
-      if (items_count > 0 && items_count < 100 ){
+    fontSizeSelector: function (decibel) {
+      if (decibel > 0 && decibel < 100 ){
         return "30"
       }
       return "50"
