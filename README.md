@@ -9,7 +9,7 @@ cp .env.example .env
 2. .envのXXXXを任意の値に変更
 3. localのdbを使用する場合
 ```
-sh sh/reset_db.sh
+sh sh/init.db.sh
 ```
 4. コンテナのビルド
 ```
