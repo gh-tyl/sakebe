@@ -1,0 +1,37 @@
+# MacOS
+.DS_Store
+
+# Env
+.env
+.env.*
+
+### Django ###
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# media
+media/
+
+# deploy
+*.pem
+
+### Nuxtjs ###
+# dependencies
+node_modules
+# Nuxt build
+.nuxt
+# Nuxt generate
+dist
+
+### VisualStudioCode ###
+.vscode/
+
+# Environments
+.env
+
+# binary

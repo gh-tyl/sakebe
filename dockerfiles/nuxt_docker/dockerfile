@@ -1,0 +1,17 @@
+FROM ubuntu:18.04
+RUN apt-get update && \
+    apt-get install -y \
+    vim \
+    sudo \
+    curl \
+    wget \
+    nodejs \
+    npm && \
+    npm install n create-nuxt-app -g && \
+    npm install vue-tag-cloud --save && \
+    n stable && \
+    apt purge -y nodejs npm
+RUN mkdir /code
+WORKDIR /code
+ENV NODE_ENV=developments
+EXPOSE 3000
